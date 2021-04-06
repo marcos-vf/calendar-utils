@@ -917,14 +917,12 @@ export interface GetDayViewArgs {
   minimumEventHeight: number;
 }
 
-// Avoid overlapping because decimals.
 function getOverLappingWeekViewEvents(events, top, bottom) {
   top = Math.ceil(top);
   bottom = Math.floor(bottom);
   return events.filter(function (previousEvent) {
     var previousEventTop = Math.ceil(previousEvent.top);
     var previousEventBottom = Math.ceil(previousEvent.top) + Math.floor(previousEvent.height);
-    // console.log(top, previousEventBottom, bottom);
     if (top < previousEventBottom && previousEventBottom < bottom) {
       return true;
     }

@@ -917,7 +917,11 @@ export interface GetDayViewArgs {
   minimumEventHeight: number;
 }
 
-function getOverLappingWeekViewEvents(events, top, bottom) {
+function getOverLappingWeekViewEvents(
+  events: WeekViewTimeEvent[],
+  top: number,
+  bottom: number
+): WeekViewTimeEvent[] {
   top = Math.ceil(top);
   bottom = Math.floor(bottom);
   return events.filter(function (previousEvent) {

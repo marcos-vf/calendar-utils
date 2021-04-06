@@ -917,24 +917,23 @@ export interface GetDayViewArgs {
   minimumEventHeight: number;
 }
 
-function getOverLappingWeekViewEvents(
-  events: WeekViewTimeEvent[],
-  top: number,
-  bottom: number
-): WeekViewTimeEvent[] {
-  return events.filter((previousEvent: WeekViewTimeEvent) => {
-    const previousEventTop: number = previousEvent.top;
-    const previousEventBottom: number =
-      previousEvent.top + previousEvent.height;
-
+// Avoid overlapping because decimals.
+function getOverLappingWeekViewEvents(events, top, bottom) {
+  top = Math.ceil(top);
+  bottom = Math.floor(bottom);
+  return events.filter(function (previousEvent) {
+    var previousEventTop = Math.ceil(previousEvent.top);
+    var previousEventBottom = Math.ceil(previousEvent.top) + Math.floor(previousEvent.height);
+    // console.log(top, previousEventBottom, bottom);
     if (top < previousEventBottom && previousEventBottom < bottom) {
       return true;
-    } else if (top < previousEventTop && previousEventTop < bottom) {
-      return true;
-    } else if (previousEventTop <= top && bottom <= previousEventBottom) {
+    }
+    else if (top < previousEventTop && previousEventTop < bottom) {
       return true;
     }
-
+    else if (previousEventTop <= top && bottom <= previousEventBottom) {
+      return true;
+    }
     return false;
   });
 }

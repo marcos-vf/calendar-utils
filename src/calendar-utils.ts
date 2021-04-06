@@ -929,11 +929,9 @@ function getOverLappingWeekViewEvents(
     var previousEventBottom: number = Math.ceil(previousEvent.top) + Math.floor(previousEvent.height);
     if (top < previousEventBottom && previousEventBottom < bottom) {
       return true;
-    }
-    else if (top < previousEventTop && previousEventTop < bottom) {
+    } else if (top < previousEventTop && previousEventTop < bottom) {
       return true;
-    }
-    else if (previousEventTop <= top && bottom <= previousEventBottom) {
+    } else if (previousEventTop <= top && bottom <= previousEventBottom) {
       return true;
     }
     return false;

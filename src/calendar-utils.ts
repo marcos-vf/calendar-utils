@@ -926,7 +926,8 @@ function getOverLappingWeekViewEvents(
   bottom = Math.floor(bottom);
   return events.filter((previousEvent: WeekViewTimeEvent) => {
     var previousEventTop: number = Math.ceil(previousEvent.top);
-    var previousEventBottom: number = Math.ceil(previousEvent.top) + Math.floor(previousEvent.height);
+    var previousEventBottom: number = 
+        Math.ceil(previousEvent.top) + Math.floor(previousEvent.height);
     if (top < previousEventBottom && previousEventBottom < bottom) {
       return true;
     } else if (top < previousEventTop && previousEventTop < bottom) {
@@ -934,6 +935,7 @@ function getOverLappingWeekViewEvents(
     } else if (previousEventTop <= top && bottom <= previousEventBottom) {
       return true;
     }
+
     return false;
   });
 }
